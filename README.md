@@ -1,6 +1,6 @@
 # Floo
 
-A router supporting AOP, stack control, cross-page message, and dynamic routing.
+An URL router supporting AOP, stack control, cross-page message, and dynamic routing.
 
 ## Getting started
 
@@ -21,6 +21,8 @@ dependencies {
 ```
 
 ## Usage
+
+Initialize at first. Example: 
 
 ```java
 public class App extends Application {
@@ -48,6 +50,8 @@ public class App extends Application {
 }
 ```
 
+Navigation usage example:
+
 ```java
 Floo.navigation(this, "sdk://m.drakeet.me/home")
     .appendQueryParameter("date", "2017.9.11")
@@ -55,6 +59,8 @@ Floo.navigation(this, "sdk://m.drakeet.me/home")
     .putExtra(TargetActivity.KEY_MAIL, mail)
     .start();
 ```
+
+Stack usage examples:
 
 ```java
 Floo.stack(this)
@@ -66,7 +72,7 @@ Floo.stack(this)
 ```java
 Floo.stack(this)
     .popCount(2)
-    .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
+    .result(anything)
     .start();
 ```
 

@@ -44,7 +44,7 @@ public class App extends Application {
             .addTargetInterceptor(new LogInterceptor("Target"))
             .addTargetNotFoundHandler(new WebHandler())
             .addTargetNotFoundHandler(new OpenDirectlyHandler())
-            .addTargetNotFoundHandler(new ToastTargetNotFoundHandler());
+            .addTargetNotFoundHandler(new TargetNotFoundToaster());
 
         Floo.apply(mappings);
     }

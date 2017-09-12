@@ -27,7 +27,7 @@ import me.drakeet.floo.TargetNotFoundHandler;
 /**
  * @author drakeet
  */
-public class ToastTargetNotFoundHandler implements TargetNotFoundHandler {
+public class TargetNotFoundToaster implements TargetNotFoundHandler {
 
     @Override
     public boolean onTargetNotFound(

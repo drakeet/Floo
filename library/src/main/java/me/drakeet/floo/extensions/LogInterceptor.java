@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.drakeet.floo.sample;
+package me.drakeet.floo.extensions;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -36,7 +36,7 @@ public class LogInterceptor implements Interceptor {
 
     @NonNull @Override
     public Chain intercept(@NonNull Chain chain) {
-        Log.d("LogInterceptor", tag + ": " + chain.request());
+        Log.d("Floo", "LogInterceptor: " + tag + ": " + chain.request());
         return chain;
     }
 }

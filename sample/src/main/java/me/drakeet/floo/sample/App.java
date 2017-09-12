@@ -21,6 +21,7 @@ import me.drakeet.floo.Floo;
 import me.drakeet.floo.Target;
 import java.util.HashMap;
 import java.util.Map;
+import me.drakeet.floo.extensions.LogInterceptor;
 import me.drakeet.floo.extensions.OpenDirectlyHandler;
 
 /**

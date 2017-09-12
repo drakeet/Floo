@@ -77,7 +77,7 @@ Floo.stack(this)
 ```
 
 ```java
-Floo.stack(this).popCount(1).start();
+Floo.stack(this).popCount(3).start();
 ```
 
 ### Interfaces

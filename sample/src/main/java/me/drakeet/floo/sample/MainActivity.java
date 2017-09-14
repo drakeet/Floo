@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onStartByHostAndPort(View view) {
+        Floo.navigation(this, "http://writer.chunchun.io:8080").start();
+    }
+
+
     public void onStartError(View view) {
         final String invalidUrl = "BS08PTQ9FS85K34E";
         Floo.navigation(this, invalidUrl)

@@ -71,6 +71,11 @@
 
         <Button
             style="@style/ActionButton"
+            android:onClick="onStartByHostAndPort"
+            android:text="onStartByHostAndPort"/>
+
+        <Button
+            style="@style/ActionButton"
             android:onClick="onStartError"
             android:text="onStartError"/>
 

@@ -20,9 +20,7 @@ dependencies {
 }
 ```
 
-## Usage
-
-Initialize at first. Example: 
+## Usage & Examples
 
 ```java
 public class App extends Application {
@@ -50,8 +48,6 @@ public class App extends Application {
 }
 ```
 
-Navigation usage example:
-
 ```java
 Floo.navigation(this, "sdk://m.drakeet.me/home")
     .appendQueryParameter("date", "2017.9.11")
@@ -60,12 +56,10 @@ Floo.navigation(this, "sdk://m.drakeet.me/home")
     .start();
 ```
 
-Stack usage examples:
-
 ```java
 Floo.stack(this)
     .target(Urls.indexUrl("https://chunchun.io/page2"))
-    .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
+    .result("abc")
     .start();
 ```
 
@@ -80,7 +74,32 @@ Floo.stack(this)
 Floo.stack(this).popCount(3).start();
 ```
 
-### Interfaces
+### Principle
+
+For example, if we call the following code:
+
+```java
+Floo.navigation(context, "https://play.google.com/store/apps/details")
+    .appendQueryParameter("id", "com.drakeet.purewriter")
+    .start();
+```
+
+At the beginning, Floo will build the URL and parameters to a full URL, like as: [https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter), and ask your registered `RequestInterceptor`s: _"Do you want to intercept and handle the URL?"_
+
+Every your registered `RequestInterceptor` will receive the full URL one by one. If someone deals with it and returns `true`, the link ends.
+
+Otherwise, Floo will use the `host` + `path` to get an **index key**. For this example, it is `play.google.com` + `/store/apps/details` -> `play.google.com/store/apps/details`.
+
+Then, Floo uses the **index key** to find a registered target URL/URI. If Floo finds it, Floo will transfer or merge the parameters of the original URL to the new URL. Otherwise, Floo will create a TargetNotFound event, and dispatch it to all of your registered `TargetNotFoundHandler`s one by one. If someone deals with it and returns `true`, the link ends. If nobody deals with it, the link also ends.
+
+So what if Floo finds a target and generates a new URL? 
+
+At this point, Floo will send the new URL one by one to your registered `TargetInterceptor`s. If someone deals with it and returns `true`, the link ends. 
+
+Otherwise, Floo comes to the last step, it will use this new URL to create an Intent, and start the Intent. This new URL may be associated with an `Activity`, so the `Activity` will be opened.
+
+
+### More Interfaces
 
 ```java
 public interface Navigation {
@@ -134,6 +153,11 @@ public interface StackStates {
     }
 }
 ```
+
+### Some built-in extensions
+
+- `LogInterceptor`
+- `OpenDirectlyHandler`
 
 
 License

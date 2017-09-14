@@ -2,6 +2,10 @@
 
 An URL router supporting AOP, stack control, cross-page message, and dynamic routing.
 
+[![Build Status](https://travis-ci.org/drakeet/Floo.svg)](https://travis-ci.org/drakeet/Floo)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/drakeet/Floo/blob/master/LICENSE)
+![maven-central](https://img.shields.io/maven-central/v/me.drakeet.floo/floo.svg)
+
 ## Getting started
 
 In your `build.gradle`:

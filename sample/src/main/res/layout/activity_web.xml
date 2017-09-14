@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="21sp"
+        android:textSize="20sp"
         android:text="@string/loading"/>
 
     <WebView

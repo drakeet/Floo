@@ -74,7 +74,7 @@ Floo.stack(this)
 Floo.stack(this).popCount(3).start();
 ```
 
-### Principle
+## Principle
 
 For example, if we call the following code:
 
@@ -99,7 +99,7 @@ At this point, Floo will send the new URL one by one to your registered `TargetI
 Otherwise, Floo comes to the last step, it will use this new URL to create an Intent, and start the Intent. This new URL may be associated with an `Activity`, so the `Activity` will be opened.
 
 
-### More Interfaces
+## More Interfaces
 
 ```java
 public interface Navigation {
@@ -154,7 +154,7 @@ public interface StackStates {
 }
 ```
 
-### Some built-in extensions
+## Some built-in extensions
 
 - `LogInterceptor`
 - `OpenDirectlyHandler`

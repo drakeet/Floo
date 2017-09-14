@@ -38,6 +38,7 @@ public class App extends Application {
         mappings.put("m.drakeet.me/link", new Target("floo://drakeet.sdk/target"));
         mappings.put("m.drakeet.me/web", new Target("floo://drakeet.sdk/web"));
         mappings.put("m.drakeet.me/container", new Target("demo://m.drakeet.me/container"));
+        mappings.put("writer.chunchun.io:8080", new Target("https://play.google.com/store/apps/details?id=com.drakeet.purewriter"));
 
         Floo.configuration()
             .setDebugEnabled(true)

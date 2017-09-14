@@ -16,8 +16,12 @@
 
 package me.drakeet.floo.sample;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import java.net.URLEncoder;
@@ -101,5 +105,25 @@ public class MainActivity extends AppCompatActivity {
             .appendQueryParameter("tab", "profile")
             .appendQueryParameter("user_id", "drakeet")
             .start();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.github) {
+            // This navigation will be handled by our registered WebHandler
+            // Floo.navigation(this, "https://github.com/drakeet/Floo").start();
+            // So we should open it by self:
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/drakeet/Floo")));
+        }
+        return true;
     }
 }

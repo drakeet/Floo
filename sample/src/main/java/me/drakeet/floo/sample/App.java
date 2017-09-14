@@ -40,7 +40,7 @@ public class App extends Application {
         mappings.put("m.drakeet.me/container", new Target("demo://m.drakeet.me/container"));
 
         Floo.configuration()
-            .setDebugEnabled(BuildConfig.DEBUG)
+            .setDebugEnabled(true)
             .addRequestInterceptor(new LogInterceptor("Request"))
             .addTargetInterceptor(new LogInterceptor("Target"))
             .addTargetNotFoundHandler(new WebHandler())

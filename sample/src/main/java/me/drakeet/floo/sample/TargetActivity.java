@@ -43,7 +43,9 @@ public class TargetActivity extends AppCompatActivity {
         }
 
         String sourceUrl = intent.getStringExtra("__source__");
-        setTitle(Uri.parse(sourceUrl).getPath());
+        if (sourceUrl != null) {
+            setTitle(Uri.parse(sourceUrl).getPath());
+        }
 
         String subUrl = intent.getData().getQueryParameter("url");
         if (subUrl != null) {

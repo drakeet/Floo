@@ -28,8 +28,6 @@ dependencies {
 
 ## Usage & Examples
 
-![URL parts](https://ws1.sinaimg.cn/large/86e2ff85gy1fjjh7zkn4sj212u02kjs0.jpg)
-
 ```java
 public class App extends Application {
 
@@ -97,6 +95,8 @@ At the beginning, Floo will build the URL and parameters to a full URL, like as:
 Every your registered `RequestInterceptor` will receive the full URL one by one. If someone deals with it and returns `true`, the link ends.
 
 Otherwise, Floo will use the `authority(host:port)` + `path` to get an **index key**. For this example, it is `play.google.com` + `/store/apps/details` -> `play.google.com/store/apps/details`.
+
+![url-parts.png](url-parts.png)
 
 Then, Floo uses the **index key** to find a registered target URL/URI. If Floo finds it, Floo will transfer or merge the parameters of the original URL to the new URL. Otherwise, Floo will create a TargetNotFound event, and dispatch it to all of your registered `TargetNotFoundHandler`s one by one. If someone deals with it and returns `true`, the link ends. If nobody deals with it, the link also ends.
 

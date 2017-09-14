@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onStartH5WithPageURL(View view) {
-        Floo.navigation(this, "https://m.drakeet.me/web")
+        Floo.navigation(this, URLs.WEB)
             .appendQueryParameter("url", "https://github.com/drakeet")
             .start();
     }
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onStartNoRegisteredPage(View view) {
-        Floo.navigation(this, "demo://m.drakeet.me/no_registered").start();
+        Floo.navigation(this, URLs.NOT_REGISTERED).start();
     }
 
 

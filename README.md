@@ -28,6 +28,8 @@ dependencies {
 
 ## Usage & Examples
 
+![URL parts](https://ws1.sinaimg.cn/large/86e2ff85gy1fjjh7zkn4sj212u02kjs0.jpg)
+
 ```java
 public class App extends Application {
 

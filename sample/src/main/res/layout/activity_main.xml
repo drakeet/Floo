@@ -30,7 +30,7 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:textStyle="bold"
             android:textSize="12sp"/>
 
@@ -68,6 +68,11 @@
             style="@style/ActionButton"
             android:onClick="onStartNoRegisteredPage"
             android:text="onStartNoRegisteredPage"/>
+
+        <Button
+            style="@style/ActionButton"
+            android:onClick="onStartSimpleKey"
+            android:text="onStartSimpleKey"/>
 
         <Button
             style="@style/ActionButton"

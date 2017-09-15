@@ -41,15 +41,15 @@ public class TargetMapParser {
     /**
      * Convert a target map to JSON string.
      *
-     * @param map The target map.
+     * @param targetMap The target map.
      * @return A JSON string of the map.
      */
     @NonNull
-    public String toJson(@NonNull Map<String, Target> map) {
+    public String toJson(@NonNull Map<String, Target> targetMap) {
         final Map<String, JSONObject> flatMap = new HashMap<>();
-        for (String key : map.keySet()) {
+        for (Map.Entry<String, Target> entry : targetMap.entrySet()) {
             try {
-                flatMap.put(key, toJsonObject(map.get(key)));
+                flatMap.put(entry.getKey(), toJsonObject(entry.getValue()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

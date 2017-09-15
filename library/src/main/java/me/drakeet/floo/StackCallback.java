@@ -16,7 +16,6 @@
 
 package me.drakeet.floo;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
@@ -24,7 +23,7 @@ import android.support.annotation.Nullable;
  */
 public interface StackCallback {
 
-    @NonNull String indexKeyForStackTarget();
+    @Nullable String indexKeyForStackTarget();
 
     void onReceivedResult(@Nullable Object result);
 }

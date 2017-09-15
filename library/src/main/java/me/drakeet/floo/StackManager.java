@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * @author drakeet
@@ -109,8 +110,8 @@ final class StackManager {
     }
 
 
-    private static boolean match(@NonNull String matcherKey) {
-        return matcherKey.equals(StackManager.targetIndexKey);
+    private static boolean match(@Nullable String matcherKey) {
+        return equals(matcherKey, StackManager.targetIndexKey);
     }
 
 
@@ -132,5 +133,10 @@ final class StackManager {
     @NonNull
     private static StackCallback stackCallback(@NonNull Activity activity) {
         return (StackCallback) activity;
+    }
+
+
+    private static boolean equals(Object a, Object b) {
+        return (a == b) || (a != null && a.equals(b));
     }
 }

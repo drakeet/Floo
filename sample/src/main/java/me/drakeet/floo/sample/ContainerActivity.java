@@ -19,7 +19,6 @@ package me.drakeet.floo.sample;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -38,8 +37,11 @@ public class ContainerActivity extends AppCompatActivity implements StackCallbac
     private TextView textView;
 
 
-    @NonNull @Override
+    @Nullable @Override
     public String indexKeyForStackTarget() {
+        if (getIntent().getData() == null) {
+            return null;
+        }
         String pageURLOfThis = getIntent().getData().getQueryParameter("url");
         Uri pageUri = Uri.parse(pageURLOfThis);
 

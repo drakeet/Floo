@@ -16,6 +16,7 @@
 
 package me.drakeet.floo.sample;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,18 +29,22 @@ import android.widget.TextView;
 
 public class WebActivity extends AppCompatActivity {
 
-    public static final String URL = "url";
+    private static final String URL = "url";
     private TextView loading;
 
 
     @Override
+    @SuppressLint("SetJavaScriptEnabled")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
         WebView webView = (WebView) findViewById(R.id.web_view);
         String url = getIntent().getStringExtra(URL);
-        if (url == null) {
+        if (url == null && getIntent().getData() != null) {
             url = getIntent().getData().getQueryParameter(URL);
+        }
+        if (url == null) {
+            finish();
         }
         webView.setWebViewClient(new InnerWebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);

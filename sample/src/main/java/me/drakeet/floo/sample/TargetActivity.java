@@ -38,6 +38,7 @@ public class TargetActivity extends AppCompatActivity {
         text.append("\n\n\nExtras: \n\n");
 
         Bundle bundle = intent.getExtras();
+        assert bundle != null;
         for (String key : bundle.keySet()) {
             text.append(key + "\n" + bundle.get(key) + "\n\n");
         }
@@ -47,6 +48,7 @@ public class TargetActivity extends AppCompatActivity {
             setTitle(Uri.parse(sourceUrl).getPath());
         }
 
+        // noinspection ConstantConditions
         String subUrl = intent.getData().getQueryParameter("url");
         if (subUrl != null) {
             text.append("\n\nSUB-URL: ");

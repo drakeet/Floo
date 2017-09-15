@@ -14,7 +14,7 @@ In your `build.gradle`:
 
 ```groovy
 dependencies {
-    compile 'me.drakeet.floo:floo:1.0.2'
+    compile 'me.drakeet.floo:floo:1.0.3'
 }
 ```
 
@@ -22,7 +22,7 @@ If you are using `com.android.tools.build:gradle:3.+`, use this instead:
 
 ```groovy
 dependencies {
-    implementation 'me.drakeet.floo:floo:1.0.2'
+    implementation 'me.drakeet.floo:floo:1.0.3'
 }
 ```
 

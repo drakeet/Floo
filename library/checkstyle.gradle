@@ -1,11 +1,11 @@
 apply plugin: 'checkstyle'
 
 checkstyle{
-    toolVersion = 8.1
+    toolVersion = 8.2
 }
 
-task Checkstyle(type: Checkstyle) {
-    description = 'Runs Checkstyle inspection against Floo sourcesets.'
+task checkStyle(type: Checkstyle) {
+    description = 'Runs checkStyle inspection against Floo sourcesets.'
     group = 'Code Style'
     configFile = rootProject.file('checkstyle.xml')
     ignoreFailures = false
@@ -16,5 +16,5 @@ task Checkstyle(type: Checkstyle) {
 
 // check code style after project evaluation
 afterEvaluate { project ->
-    getTasksByName('Checkstyle', false)[0].execute()
+    getTasksByName('checkStyle', false)[0].execute()
 }

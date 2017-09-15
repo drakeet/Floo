@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class Configuration {
 
-    private @NonNull TargetMap targetMap;
+    private @NonNull final TargetMap targetMap;
     private @NonNull final List<TargetNotFoundHandler> targetNotFoundHandlers;
     private @NonNull final List<Interceptor> requestInterceptors;
     private @NonNull final List<Interceptor> targetInterceptors;
@@ -126,7 +126,6 @@ public class Configuration {
     @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void initStackObserverIfNeed(@NonNull Activity activity) {
         if (!stackObserverInitialized) {
-
             activity.getApplication().registerActivityLifecycleCallbacks(
                 new ActivityOnResumeCallback() {
 
@@ -135,6 +134,7 @@ public class Configuration {
                         StackManager.onActivityResumed(activity);
                     }
                 });
+            stackObserverInitialized = true;
         }
     }
 }

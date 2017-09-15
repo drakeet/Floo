@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView text = (TextView) findViewById(R.id.text);
         Map<String, Target> targetMap = Floo.getTargetMap();
-        for (String url : targetMap.keySet()) {
-            text.append(url);
+        for (Map.Entry<String, Target> entry : targetMap.entrySet()) {
+            text.append(entry.getKey());
             text.append("\t\t <-> \t\t");
-            text.append(targetMap.get(url).toTargetUrl());
+            text.append(entry.getValue().toTargetUrl());
             text.append("\n");
         }
     }

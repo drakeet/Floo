@@ -334,8 +334,8 @@ public final class Floo implements Navigation {
     @NonNull
     private Uri appendSourceUri(@NonNull final Uri base, @NonNull final Map<String, String> queryParams) {
         final Uri.Builder sourceBuilder = base.buildUpon();
-        for (String paramKey : queryParams.keySet()) {
-            sourceBuilder.appendQueryParameter(paramKey, queryParams.get(paramKey));
+        for (Map.Entry<String, String> query : queryParams.entrySet()) {
+            sourceBuilder.appendQueryParameter(query.getKey(), query.getValue());
         }
         return sourceBuilder.build();
     }
@@ -362,8 +362,8 @@ public final class Floo implements Navigation {
         map.putAll(encodedQueryParameters(sourceUri));
         map.putAll(encodedQueryParameters(sessionUri));
         StringBuilder builder = new StringBuilder();
-        for (String key : map.keySet()) {
-            builder.append(key).append("=").append(map.get(key)).append("&");
+        for (Map.Entry<String, String> query : map.entrySet()) {
+            builder.append(query.getKey()).append("=").append(query.getValue()).append("&");
         }
         String result = builder.toString();
         if (result.endsWith("&")) {

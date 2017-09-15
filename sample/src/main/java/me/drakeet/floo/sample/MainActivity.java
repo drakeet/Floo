@@ -99,8 +99,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onStartSimpleKey(View view) {
+        Floo.navigation(this, "PureWriter").start();
+    }
+
+
     public void onStartByHostAndPort(View view) {
-        Floo.navigation(this, "http://writer.chunchun.io:8080").start();
+        Floo.navigation(this, "http://mosaic.chunchun.io:8080").start();
     }
 
 

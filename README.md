@@ -63,6 +63,11 @@ Floo.navigation(this, "sdk://m.drakeet.me/home")
 ```
 
 ```java
+// Allow incomplete URLs
+Floo.navigation(this, "PureWriter").start();
+```
+
+```java
 Floo.stack(this)
     .target(Urls.indexUrl("https://chunchun.io/page2"))
     .result("abc")

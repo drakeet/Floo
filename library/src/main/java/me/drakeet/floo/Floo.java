@@ -51,9 +51,9 @@ public final class Floo implements Navigation {
 
     private static final Configuration CONFIGURATION = new Configuration();
 
-    private @NonNull Context context;
-    private @NonNull Bundle bundle;
-    private @NonNull Map<String, String> queryParams;
+    private @NonNull final Context context;
+    private @NonNull final Bundle bundle;
+    private @NonNull final Map<String, String> queries;
     private @NonNull Uri sourceUri;
 
     private @Nullable Uri targetUri;
@@ -64,7 +64,7 @@ public final class Floo implements Navigation {
         this.context = context;
         this.bundle = new Bundle();
         this.sourceUri = Uri.parse(url);
-        this.queryParams = new HashMap<>();
+        this.queries = new HashMap<>();
     }
 
 
@@ -173,7 +173,7 @@ public final class Floo implements Navigation {
      */
     @NonNull @Override @CheckResult
     public Navigation appendQueryParameter(@NonNull String key, @NonNull String value) {
-        queryParams.put(key, value);
+        queries.put(key, value);
         return this;
     }
 
@@ -221,7 +221,7 @@ public final class Floo implements Navigation {
      */
     @Nullable @Override @CheckResult
     public Intent getIntent() {
-        sourceUri = appendSourceUri(sourceUri, queryParams);
+        sourceUri = appendSourceUri(sourceUri, queries);
         Chain chain = interceptRequest(sourceUri);
         sourceUri = chain.request();
         if (chain.isProceed()) {

@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * @author drakeet
@@ -136,7 +135,7 @@ final class StackManager {
     }
 
 
-    private static boolean equals(Object a, Object b) {
+    private static boolean equals(@Nullable Object a, @Nullable Object b) {
         return (a == b) || (a != null && a.equals(b));
     }
 }

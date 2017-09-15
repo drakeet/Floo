@@ -24,7 +24,7 @@ import android.support.annotation.Nullable;
 /**
  * @author drakeet
  */
-class StackManager {
+final class StackManager {
 
     private @Nullable static String targetIndexKey;
     private @Nullable static Object result;

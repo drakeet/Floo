@@ -53,11 +53,15 @@ public class Mail implements Parcelable {
 
     public static final Parcelable.Creator<Mail> CREATOR = new Parcelable.Creator<Mail>() {
         @Override
-        public Mail createFromParcel(Parcel source) {return new Mail(source);}
+        public Mail createFromParcel(Parcel source) {
+            return new Mail(source);
+        }
 
 
         @Override
-        public Mail[] newArray(int size) {return new Mail[size];}
+        public Mail[] newArray(int size) {
+            return new Mail[size];
+        }
     };
 
 

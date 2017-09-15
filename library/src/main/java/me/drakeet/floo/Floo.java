@@ -45,7 +45,7 @@ import static java.lang.String.format;
 /**
  * @author drakeet
  */
-public class Floo implements Navigation {
+public final class Floo implements Navigation {
 
     private static final String TAG = "Floo";
 

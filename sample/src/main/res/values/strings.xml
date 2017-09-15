@@ -14,7 +14,9 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="TypographyEllipsis">
     <string name="app_name">Floo</string>
     <string name="loading">Loading...</string>
 </resources>

@@ -23,8 +23,8 @@ android {
         applicationId "me.drakeet.floo.sample"
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.0.2.1"
+        ersionCode 6
+        versionName "1.0.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

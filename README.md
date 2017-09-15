@@ -98,7 +98,7 @@ Otherwise, Floo will use the `authority(host:port)` + `path` to get an **index k
 
 ![url-parts.png](url-parts.png)
 
-Then, Floo uses the **index key** to find a registered target URL/URI. If Floo finds it, Floo will transfer or merge the parameters of the original URL to the new URL. Otherwise, Floo will create a TargetNotFound event, and dispatch it to all of your registered `TargetNotFoundHandler`s one by one. If someone deals with it and returns `true`, the link ends. If nobody deals with it, the link also ends.
+Then, Floo uses the **index key** to find a registered target URL / URI. If Floo finds it, Floo will transfer or merge the parameters of the original URL to the new URL. Otherwise, Floo will create a TargetNotFound event, and dispatch it to all of your registered `TargetNotFoundHandler`s one by one. If someone deals with it and returns `true`, the link ends. If nobody deals with it, the link also ends.
 
 So what if Floo finds a target and generates a new URL? 
 

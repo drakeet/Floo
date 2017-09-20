@@ -4,11 +4,11 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/drakeet/Floo/blob/master/LICENSE)
 ![maven-central](https://img.shields.io/maven-central/v/me.drakeet.floo/floo.svg)
 
+English Version | [中文版](README_CN.md)
+
 An URL router supporting AOP, stack control, cross-page message, and dynamic routing.
 
 <a href='https://play.google.com/store/apps/details?id=me.drakeet.floo.sample&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get sample on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200 height=77/></a>
-
-English Version | [中文版](README_CN.md)
 
 ## Getting started
 

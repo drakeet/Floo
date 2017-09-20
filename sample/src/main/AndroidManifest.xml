@@ -47,9 +47,9 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
+                    android:scheme="@string/scheme"
                     android:host="drakeet.sdk"
-                    android:path="/target"
-                    android:scheme="floo"/>
+                    android:path="/target"/>
             </intent-filter>
         </activity>
 
@@ -63,9 +63,9 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
+                    android:scheme="@string/scheme"
                     android:host="drakeet.sdk"
-                    android:path="/web"
-                    android:scheme="floo"/>
+                    android:path="/web"/>
             </intent-filter>
         </activity>
 
@@ -77,9 +77,9 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
+                    android:scheme="@string/scheme"
                     android:host="m.drakeet.me"
-                    android:path="/container"
-                    android:scheme="demo"/>
+                    android:path="/container"/>
             </intent-filter>
         </activity>
 
@@ -91,9 +91,9 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
+                    android:scheme="@string/scheme"
                     android:host="m.drakeet.me"
-                    android:path="/not_registered"
-                    android:scheme="demo"/>
+                    android:path="/not_registered"/>
             </intent-filter>
         </activity>
 

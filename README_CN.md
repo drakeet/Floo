@@ -4,15 +4,15 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/drakeet/Floo/blob/master/LICENSE)
 ![maven-central](https://img.shields.io/maven-central/v/me.drakeet.floo/floo.svg)
 
-English Version | [中文版](README_CN.md)
-
-An URL router supporting AOP, stack control, cross-page message, and dynamic routing.
+一个支持 AOP、栈控制、跨页面带信、和动态变更映射的 URL 路由库。
 
 <a href='https://play.google.com/store/apps/details?id=me.drakeet.floo.sample&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get sample on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200 height=77/></a>
 
-## Getting started
+_注：本中文版 README 可能不会及时更新，请以英文版为主_
 
-In your `build.gradle`:
+## 快速开始
+
+在你的 `build.gradle` 文件里添加:
 
 ```groovy
 dependencies {
@@ -20,7 +20,7 @@ dependencies {
 }
 ```
 
-If you are using `com.android.tools.build:gradle:3.+`, use this instead:
+如果你使用 `com.android.tools.build:gradle:3.+`, 改用:
 
 ```groovy
 dependencies {
@@ -28,7 +28,7 @@ dependencies {
 }
 ```
 
-## Usage & Examples
+## 用法用例
 
 ```java
 public class App extends Application {
@@ -65,7 +65,7 @@ Floo.navigation(this, "sdk://m.drakeet.me/home")
 ```
 
 ```java
-// Allow incomplete URLs
+// 允许不完整的 URL
 Floo.navigation(this, "PureWriter").start();
 ```
 
@@ -87,9 +87,9 @@ Floo.stack(this)
 Floo.stack(this).popCount(3).start();
 ```
 
-## Principle
+## 原理
 
-For example, if we call the following code:
+例如我们调用了下列代码：
 
 ```java
 Floo.navigation(context, "https://play.google.com/store/apps/details")
@@ -97,24 +97,24 @@ Floo.navigation(context, "https://play.google.com/store/apps/details")
     .start();
 ```
 
-At the beginning, Floo will build the URL and parameters to a full URL, like as: [https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter), and ask your registered `RequestInterceptor`s: _"Do you want to intercept and handle the URL?"_
+在一开始，Floo 会将其中的 URL 和参数组装成一个完整的 URL：[https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter)，然后询问你那些注册过的  `RequestInterceptor` 们：_“你们要需要拦截和处理这个 URL 吗？”_
 
-Every your registered `RequestInterceptor` will receive the full URL one by one. If someone deals with it and returns `true`, the link ends.
+那些你注册过的 `RequestInterceptor` 们将会依序收到这个完整的 URL。如果其中某一个 `RequestInterceptor` 处理并返回了 `true`，则传播就直接结束没有后续了。
 
-Otherwise, Floo will use the `authority(host:port)` + `path` to get an **index key**. For this example, it is `play.google.com` + `/store/apps/details` -> `play.google.com/store/apps/details`.
+否则，Floo 将会使用 `authority(host:port)` + `path` 来获得一个 **index key** 。对于上面我们的例子，就是 `play.google.com` 和 `/store/apps/details` 构成了 `play.google.com/store/apps/details`。
 
 ![url-parts.png](url-parts.png)
 
-Then, Floo uses the **index key** to find a registered target URL / URI. If Floo finds it, Floo will transfer or merge the parameters of the original URL to the new URL. Otherwise, Floo will create a TargetNotFound event, and dispatch it to all of your registered `TargetNotFoundHandler`s one by one. If someone deals with it and returns `true`, the link ends. If nobody deals with it, the link also ends.
+接下来，Floo 将使用这个 **index key** 来寻找一个已注册过的目标 URL / URI。如果 Floo 找到了，它会将目标 URL 与源 URL 进行参数转移、合并形成新的 URL。否则，Foo 将产生一个 TargetNotFound 事件，然后依序分发给所有已经注册的 `TargetNotFoundHandler` 们。如果其中某一个 `TargetNotFoundHandler` 处理并返回了 `true`，则传播就直接结束没有后续了，如果没有任何 Handler 来处理它，传播也会结束没有后续。
 
-So what if Floo finds a target and generates a new URL? 
+那么如果 Floo 找到了一个目标并且生成了一个新的 URL 呢？
 
-At this point, Floo will send the new URL one by one to your registered `TargetInterceptor`s. If someone deals with it and returns `true`, the link ends. 
+这时候，Floo 会将这个新的 URL 依序发送给注册过的 `TargetInterceptor` 们。如果某一个 `TargetInterceptor` 处理并返回了 `true`，则传播结束没有后续了。
 
-Otherwise, Floo comes to the last step, it will use this new URL to create an Intent, and start the Intent. This new URL may be associated with an `Activity`, so the `Activity` will be opened.
+否则，Floo 将会执行最后一步操作，即通过那个新的 URL 创建出 Intent 对象，打开这个 Intent。这个新的 URL 与某个 `Activity` 是关联的，因此 `Activity` 被会被启动与打开。
 
 
-## More Interfaces
+## 更多接口
 
 ```java
 public interface Navigation {
@@ -169,7 +169,7 @@ public interface StackStates {
 }
 ```
 
-## Some built-in extensions
+## 一些内置的扩展
 
 - `LogInterceptor`
 - `OpenDirectlyHandler`

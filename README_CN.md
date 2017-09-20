@@ -18,7 +18,7 @@ dependencies {
 }
 ```
 
-如果你使用 `com.android.tools.build:gradle:3.+`, 使用下面这个来替代:
+如果你使用 `com.android.tools.build:gradle:3.+`, 改用:
 
 ```groovy
 dependencies {
@@ -63,7 +63,7 @@ Floo.navigation(this, "sdk://m.drakeet.me/home")
 ```
 
 ```java
-// 允许分段的 URL
+// 允许不完整的 URL
 Floo.navigation(this, "PureWriter").start();
 ```
 
@@ -87,7 +87,7 @@ Floo.stack(this).popCount(3).start();
 
 ## 原理
 
-举个例子，如果我们调用了下列代码：
+例如我们调用了下列代码：
 
 ```java
 Floo.navigation(context, "https://play.google.com/store/apps/details")
@@ -95,21 +95,21 @@ Floo.navigation(context, "https://play.google.com/store/apps/details")
     .start();
 ```
 
-在一开始，Floo 将填写的 URL 和参数组装成一个完整的 URL，就像这样 [https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter)，然后询问你已经注册的那些  `RequestInterceptor`：是否需要拦截处理这些 URL 呢？
+在一开始，Floo 会将其中的 URL 和参数组装成一个完整的 URL：[https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter)，然后询问你那些注册过的  `RequestInterceptor`：_“你们要需要拦截和处理这个 URL 吗？”_
 
-每一个你已经注册的 `RequestInterceptor` 都会依序收到完整的 URL。除非其中某一个 `RequestInterceptor` 返回了 true，则传播就直接结束了。
+那些你注册过的 `RequestInterceptor` 们将会依序收到完整的 URL。如果其中某一个 `RequestInterceptor` 处理并返回了 `true`，则传播就直接结束没有后续了。
 
-否则，Floo 将会使用 `authority(host:port)` + `path` 来获得一个 **index key** 。举个例子，`play.google.com` 和 `/store/apps/details` 构成了 `play.google.com/store/apps/details`。
+否则，Floo 将会使用 `authority(host:port)` + `path` 来获得一个 **index key** 。对于如上我们的例子，就是 `play.google.com` 和 `/store/apps/details` 构成了 `play.google.com/store/apps/details`。
 
 ![url-parts.png](url-parts.png)
 
-接下来，Floo 使用那个 **index key** 来寻找一个已注册过的 URL / URI 目标。如果 Floo 找到了，则会将参数转换合并成新的 URL。否则，Fool 将创建一个 TargetNotFound 事件，然后按照顺序一个个的分发给所有已经注册的 `TargetNotFoundHandler` 。如果其中某一个 `TargetNotFoundHandler` 返回了 true，则传播就直接结束，如果没有任何 Handler 来处理它，传播也依然会结束。
+接下来，Floo 将使用这个 **index key** 来寻找一个已注册过的目标 URL / URI。如果 Floo 找到了，它会将目标 URL 与源 URL 进行参数转移、合并形成新的 URL。否则，Foo 将产生一个 TargetNotFound 事件，然后依序分发给所有已经注册的 `TargetNotFoundHandler` 们。如果其中某一个 `TargetNotFoundHandler` 处理并返回了 true，则传播就直接结束没有后续了，如果没有任何 Handler 来处理它，传播会结束没有后续。
 
 那么如果 Floo 找到了一个目标并且生成了一个新的 URL 呢？
 
-这时候，Floo 将会一个个的按照顺序给 `TargetInterceptor` 发送新的 URL。如果某一个 `TargetInterceptor` 处理过后返回了 true，则传播结束。
+这时候，Floo 会将这个新的 URL 依序发送给注册过的 `TargetInterceptor` 们。如果某一个 `TargetInterceptor` 处理并返回了 `true`，则传播会结束没有后续了。
 
-否则，Floo 将会执行最后一步，将那个新的 URL 创建为 Intent，然后执行这个 Intent（使用 startActivity）。这个新的 URL 可以与某个 `Activity` 获得关联，然后这个 `Activity` 将会打开。
+否则，Floo 将会执行最后一步操作，即通过那个新的 URL 创建出 Intent 对象，打开这个 Intent。这个新的 URL 与某个 `Activity` 是关联的，因此 `Activity` 被会被启动与打开。
 
 
 ## 更多接口

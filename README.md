@@ -41,7 +41,7 @@ public class App extends Application {
         mappings.put("m.drakeet.me/home", new Target("floo://drakeet.sdk/target"));
         mappings.put("m.drakeet.me/link", new Target("floo://drakeet.sdk/target"));
         mappings.put("m.drakeet.me/web", new Target("floo://drakeet.sdk/web"));
-        mappings.put("m.drakeet.me/container", new Target("demo://m.drakeet.me/container"));
+        mappings.put("m.drakeet.me/container", new Target("floo://m.drakeet.me/container"));
 
         Floo.configuration()
             .setDebugEnabled(BuildConfig.DEBUG)

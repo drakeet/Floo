@@ -16,9 +16,13 @@
 
 apply plugin: 'com.android.application'
 
+def releaseKey = file('release.jks')
+def debugKey = file('debug.jks')
+
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.1'
+
     defaultConfig {
         applicationId "me.drakeet.floo.sample"
         minSdkVersion 9
@@ -27,8 +31,31 @@ android {
         versionName "1.0.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            storeFile debugKey
+            storePassword '123456'
+            keyAlias 'debug'
+            keyPassword '123456'
+        }
         release {
+            storeFile releaseKey
+            storePassword project.hasProperty('FLOO_STOREPASS') ? FLOO_STOREPASS : ''
+            keyAlias project.hasProperty('FLOO_KEYALIAS') ? FLOO_KEYALIAS : ''
+            keyPassword project.hasProperty('FLOO_KEYPASS') ? FLOO_KEYPASS : ''
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix " debug"
+            applicationIdSuffix ".debug"
+            addManifestPlaceholders([APP_NAME: "@string/app_name_debug"])
+            resValue "string", "scheme", "floo-debug"
+        }
+        release {
+            resValue "string", "scheme", "floo"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

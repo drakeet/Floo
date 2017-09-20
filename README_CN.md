@@ -167,7 +167,7 @@ public interface StackStates {
 }
 ```
 
-## 一些正在完善中的扩展
+## 一些内置的扩展
 
 - `LogInterceptor`
 - `OpenDirectlyHandler`

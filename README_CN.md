@@ -95,19 +95,19 @@ Floo.navigation(context, "https://play.google.com/store/apps/details")
     .start();
 ```
 
-在一开始，Floo 会将其中的 URL 和参数组装成一个完整的 URL：[https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter)，然后询问你那些注册过的  `RequestInterceptor`：_“你们要需要拦截和处理这个 URL 吗？”_
+在一开始，Floo 会将其中的 URL 和参数组装成一个完整的 URL：[https://play.google.com/store/apps/details?id=com.drakeet.purewriter](https://play.google.com/store/apps/details?id=com.drakeet.purewriter)，然后询问你那些注册过的  `RequestInterceptor` 们：_“你们要需要拦截和处理这个 URL 吗？”_
 
-那些你注册过的 `RequestInterceptor` 们将会依序收到完整的 URL。如果其中某一个 `RequestInterceptor` 处理并返回了 `true`，则传播就直接结束没有后续了。
+那些你注册过的 `RequestInterceptor` 们将会依序收到这个完整的 URL。如果其中某一个 `RequestInterceptor` 处理并返回了 `true`，则传播就直接结束没有后续了。
 
-否则，Floo 将会使用 `authority(host:port)` + `path` 来获得一个 **index key** 。对于如上我们的例子，就是 `play.google.com` 和 `/store/apps/details` 构成了 `play.google.com/store/apps/details`。
+否则，Floo 将会使用 `authority(host:port)` + `path` 来获得一个 **index key** 。对于上面我们的例子，就是 `play.google.com` 和 `/store/apps/details` 构成了 `play.google.com/store/apps/details`。
 
 ![url-parts.png](url-parts.png)
 
-接下来，Floo 将使用这个 **index key** 来寻找一个已注册过的目标 URL / URI。如果 Floo 找到了，它会将目标 URL 与源 URL 进行参数转移、合并形成新的 URL。否则，Foo 将产生一个 TargetNotFound 事件，然后依序分发给所有已经注册的 `TargetNotFoundHandler` 们。如果其中某一个 `TargetNotFoundHandler` 处理并返回了 true，则传播就直接结束没有后续了，如果没有任何 Handler 来处理它，传播会结束没有后续。
+接下来，Floo 将使用这个 **index key** 来寻找一个已注册过的目标 URL / URI。如果 Floo 找到了，它会将目标 URL 与源 URL 进行参数转移、合并形成新的 URL。否则，Foo 将产生一个 TargetNotFound 事件，然后依序分发给所有已经注册的 `TargetNotFoundHandler` 们。如果其中某一个 `TargetNotFoundHandler` 处理并返回了 `true`，则传播就直接结束没有后续了，如果没有任何 Handler 来处理它，传播也会结束没有后续。
 
 那么如果 Floo 找到了一个目标并且生成了一个新的 URL 呢？
 
-这时候，Floo 会将这个新的 URL 依序发送给注册过的 `TargetInterceptor` 们。如果某一个 `TargetInterceptor` 处理并返回了 `true`，则传播会结束没有后续了。
+这时候，Floo 会将这个新的 URL 依序发送给注册过的 `TargetInterceptor` 们。如果某一个 `TargetInterceptor` 处理并返回了 `true`，则传播结束没有后续了。
 
 否则，Floo 将会执行最后一步操作，即通过那个新的 URL 创建出 Intent 对象，打开这个 Intent。这个新的 URL 与某个 `Activity` 是关联的，因此 `Activity` 被会被启动与打开。
 

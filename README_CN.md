@@ -8,6 +8,8 @@
 
 <a href='https://play.google.com/store/apps/details?id=me.drakeet.floo.sample&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get sample on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width=200 height=77/></a>
 
+_注：本中文版 README 可能不会及时更新，请以英文版为主_
+
 ## 快速开始
 
 在你的 `build.gradle` 文件里添加:

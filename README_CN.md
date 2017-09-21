@@ -16,7 +16,7 @@ _注：本中文版 README 可能不会及时更新，请以英文版为主_
 
 ```groovy
 dependencies {
-    compile 'me.drakeet.floo:floo:1.0.5'
+    compile 'me.drakeet.floo:floo:1.1.0'
 }
 ```
 
@@ -24,7 +24,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation 'me.drakeet.floo:floo:1.0.5'
+    implementation 'me.drakeet.floo:floo:1.1.0'
 }
 ```
 

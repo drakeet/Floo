@@ -45,6 +45,7 @@ public class App extends Application {
 
         Floo.configuration()
             .setDebugEnabled(BuildConfig.DEBUG)
+            .setIntentHandler(new FragmentIntentHandler()) // DefaultIntentHandler by default 
             .addRequestInterceptor(new LogInterceptor("Request"))
             .addTargetInterceptor(new LogInterceptor("Target"))
             .addTargetNotFoundHandler(new WebHandler())

@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static me.drakeet.floo.Preconditions.checkNotNull;
+
 /**
  * A delegate for floo to hold the configuration fields
  *
@@ -38,6 +40,7 @@ public class Configuration {
     private @NonNull final List<TargetNotFoundHandler> targetNotFoundHandlers;
     private @NonNull final List<Interceptor> requestInterceptors;
     private @NonNull final List<Interceptor> targetInterceptors;
+    private @NonNull IntentHandler intentHandler = new DefaultIntentHandler();
     private boolean debug = false;
     private boolean stackObserverInitialized = false;
 
@@ -51,12 +54,14 @@ public class Configuration {
 
 
     void apply(@NonNull final Map<String, Target> map) {
+        checkNotNull(map);
         targetMap.set(new HashMap<>(map));
     }
 
 
     @NonNull
     public Configuration addRequestInterceptor(@NonNull Interceptor requestInterceptor) {
+        checkNotNull(requestInterceptor);
         requestInterceptors.add(requestInterceptor);
         return this;
     }
@@ -64,6 +69,7 @@ public class Configuration {
 
     @NonNull
     public Configuration addTargetInterceptor(@NonNull Interceptor responseInterceptor) {
+        checkNotNull(responseInterceptor);
         targetInterceptors.add(responseInterceptor);
         return this;
     }
@@ -71,6 +77,7 @@ public class Configuration {
 
     @NonNull
     public Configuration addTargetNotFoundHandler(@NonNull TargetNotFoundHandler handler) {
+        checkNotNull(handler);
         targetNotFoundHandlers.add(handler);
         return this;
     }
@@ -90,35 +97,48 @@ public class Configuration {
     }
 
 
-    boolean isDebugEnabled() { return debug; }
+    public boolean isDebugEnabled() { return debug; }
+
+
+    public void setIntentHandler(@NonNull IntentHandler intentHandler) {
+        checkNotNull(intentHandler);
+        this.intentHandler = intentHandler;
+    }
 
 
     @NonNull
-    List<TargetNotFoundHandler> getTargetNotFoundHandlers() {
+    public IntentHandler getIntentHandler() {
+        return intentHandler;
+    }
+
+
+    @NonNull
+    public List<TargetNotFoundHandler> getTargetNotFoundHandlers() {
         return targetNotFoundHandlers;
     }
 
 
     @NonNull
-    List<Interceptor> getRequestInterceptors() {
+    public List<Interceptor> getRequestInterceptors() {
         return requestInterceptors;
     }
 
 
     @NonNull
-    List<Interceptor> getTargetInterceptors() {
+    public List<Interceptor> getTargetInterceptors() {
         return targetInterceptors;
     }
 
 
     @Nullable
-    Target getTarget(@NonNull String url) {
+    public Target getTarget(@NonNull String url) {
+        checkNotNull(url);
         return targetMap.getTarget(url);
     }
 
 
     @NonNull
-    Map<? extends String, ? extends Target> getTargetMap() {
+    public Map<? extends String, ? extends Target> getTargetMap() {
         return targetMap.get();
     }
 

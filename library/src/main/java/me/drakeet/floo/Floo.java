@@ -187,7 +187,7 @@ public final class Floo implements Navigation {
     public void start() {
         final Intent intent = getIntent();
         if (intent != null) {
-            context.startActivity(intent);
+            configuration().getIntentHandler().onIntentCreated(context, intent);
         } else {
             log(WARN, "The target Intent is null, " +
                 "it may has been intercepted or dispatched to your TargetNotFoundHandlers.");

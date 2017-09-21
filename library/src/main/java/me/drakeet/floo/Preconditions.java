@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 /**
  * @author drakeet
  */
-public class Preconditions {
+public final class Preconditions {
 
     @NonNull
     @SuppressWarnings("ConstantConditions")

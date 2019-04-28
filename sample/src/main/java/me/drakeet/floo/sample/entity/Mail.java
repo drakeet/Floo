@@ -24,53 +24,46 @@ import android.os.Parcelable;
  */
 public class Mail implements Parcelable {
 
-    public String content;
-    public String from;
-    public String to;
+  public String content;
+  public String from;
+  public String to;
 
+  public Mail() {}
 
-    public Mail() {}
+  private Mail(Parcel in) {
+    this.content = in.readString();
+    this.from = in.readString();
+    this.to = in.readString();
+  }
 
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(this.content);
+    dest.writeString(this.from);
+    dest.writeString(this.to);
+  }
 
-    private Mail(Parcel in) {
-        this.content = in.readString();
-        this.from = in.readString();
-        this.to = in.readString();
+  @Override
+  public int describeContents() { return 0; }
+
+  public static final Parcelable.Creator<Mail> CREATOR = new Parcelable.Creator<Mail>() {
+    @Override
+    public Mail createFromParcel(Parcel source) {
+      return new Mail(source);
     }
 
-
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.content);
-        dest.writeString(this.from);
-        dest.writeString(this.to);
+    public Mail[] newArray(int size) {
+      return new Mail[size];
     }
+  };
 
-
-    @Override
-    public int describeContents() { return 0; }
-
-
-    public static final Parcelable.Creator<Mail> CREATOR = new Parcelable.Creator<Mail>() {
-        @Override
-        public Mail createFromParcel(Parcel source) {
-            return new Mail(source);
-        }
-
-
-        @Override
-        public Mail[] newArray(int size) {
-            return new Mail[size];
-        }
-    };
-
-
-    @Override
-    public String toString() {
-        return "Mail { " +
-            "name='" + content + '\'' +
-            ", from='" + from + '\'' +
-            ", to='" + to + '\'' +
-            " }";
-    }
+  @Override
+  public String toString() {
+    return "Mail { " +
+        "name='" + content + '\'' +
+        ", from='" + from + '\'' +
+        ", to='" + to + '\'' +
+        " }";
+  }
 }

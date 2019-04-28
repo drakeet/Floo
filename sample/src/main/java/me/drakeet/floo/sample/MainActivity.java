@@ -32,108 +32,96 @@ import me.drakeet.floo.sample.entity.Mail;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        TextView text = (TextView) findViewById(R.id.text);
-        Map<String, Target> targetMap = Floo.getTargetMap();
-        for (Map.Entry<String, Target> entry : targetMap.entrySet()) {
-            text.append(entry.getKey());
-            text.append("\t\t <-> \t\t");
-            text.append(entry.getValue().toTargetUrl());
-            text.append("\n");
-        }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    TextView text = (TextView) findViewById(R.id.text);
+    Map<String, Target> targetMap = Floo.getTargetMap();
+    for (Map.Entry<String, Target> entry : targetMap.entrySet()) {
+      text.append(entry.getKey());
+      text.append("\t\t <-> \t\t");
+      text.append(entry.getValue().toTargetUrl());
+      text.append("\n");
     }
+  }
 
+  public void onStartHomeWithExtraDataAndParams(View view) {
+    Mail mail = new Mail();
+    mail.content = "Hello World";
+    mail.from = "drakeet";
+    mail.to = "Xiaoai";
+    Floo.navigation(this, "sdk://m.drakeet.me/home")
+        .appendQueryParameter("date", "2017.9.11")
+        .appendQueryParameter("user_id", "drakeet")
+        .putExtra(TargetActivity.KEY_MAIL, mail)
+        .start();
+  }
 
-    public void onStartHomeWithExtraDataAndParams(View view) {
-        Mail mail = new Mail();
-        mail.content = "Hello World";
-        mail.from = "drakeet";
-        mail.to = "Xiaoai";
-        Floo.navigation(this, "sdk://m.drakeet.me/home")
-            .appendQueryParameter("date", "2017.9.11")
-            .appendQueryParameter("user_id", "drakeet")
-            .putExtra(TargetActivity.KEY_MAIL, mail)
-            .start();
+  public void onStartHomeWithParams(View view) {
+    Floo.navigation(this, "sdk://m.drakeet.me/home")
+        .appendQueryParameter("tag", "just")
+        .appendQueryParameter("tab", "top")
+        .appendQueryParameter("user_id", "drakeet")
+        .start();
+  }
+
+  public void onStartHomeWithoutScheme(View view) {
+    Floo.navigation(this, "m.drakeet.me/home").start();
+  }
+
+  public void onStartWebViewWhenUrlNotFound(View view) {
+    Floo.navigation(this, "http://drakeet.me").start();
+  }
+
+  public void onStartH5WithPageURL(View view) {
+    Floo.navigation(this, URLs.WEB)
+        .appendQueryParameter("url", "https://github.com/drakeet")
+        .start();
+  }
+
+  public void onStartPagesForResult(View view) {
+    for (int i = 1; i <= 5; i++) {
+      String pageURL = URLEncoder.encode("https://chunchun.io/page" + i);
+      Floo.navigation(this, "https://m.drakeet.me/container?url=" + pageURL).start();
     }
+  }
 
+  public void onStartNoRegisteredPage(View view) {
+    Floo.navigation(this, URLs.NOT_REGISTERED).start();
+  }
 
-    public void onStartHomeWithParams(View view) {
-        Floo.navigation(this, "sdk://m.drakeet.me/home")
-            .appendQueryParameter("tag", "just")
-            .appendQueryParameter("tab", "top")
-            .appendQueryParameter("user_id", "drakeet")
-            .start();
+  public void onStartSimpleKey(View view) {
+    Floo.navigation(this, "PureWriter").start();
+  }
+
+  public void onStartByHostAndPort(View view) {
+    Floo.navigation(this, "http://mosaic.chunchun.io:8080").start();
+  }
+
+  public void onStartError(View view) {
+    final String invalidUrl = "BS08PTQ9FS85K34E";
+    Floo.navigation(this, invalidUrl)
+        .appendQueryParameter("tab", "profile")
+        .appendQueryParameter("user_id", "drakeet")
+        .start();
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    super.onCreateOptionsMenu(menu);
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.github) {
+      // This navigation will be handled by our registered WebHandler
+      // Floo.navigation(this, "https://github.com/drakeet/Floo").start();
+      // So we should open it by self:
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/drakeet/Floo")));
     }
-
-
-    public void onStartHomeWithoutScheme(View view) {
-        Floo.navigation(this, "m.drakeet.me/home").start();
-    }
-
-
-    public void onStartWebViewWhenUrlNotFound(View view) {
-        Floo.navigation(this, "http://drakeet.me").start();
-    }
-
-
-    public void onStartH5WithPageURL(View view) {
-        Floo.navigation(this, URLs.WEB)
-            .appendQueryParameter("url", "https://github.com/drakeet")
-            .start();
-    }
-
-
-    public void onStartPagesForResult(View view) {
-        for (int i = 1; i <= 5; i++) {
-            String pageURL = URLEncoder.encode("https://chunchun.io/page" + i);
-            Floo.navigation(this, "https://m.drakeet.me/container?url=" + pageURL).start();
-        }
-    }
-
-
-    public void onStartNoRegisteredPage(View view) {
-        Floo.navigation(this, URLs.NOT_REGISTERED).start();
-    }
-
-
-    public void onStartSimpleKey(View view) {
-        Floo.navigation(this, "PureWriter").start();
-    }
-
-
-    public void onStartByHostAndPort(View view) {
-        Floo.navigation(this, "http://mosaic.chunchun.io:8080").start();
-    }
-
-
-    public void onStartError(View view) {
-        final String invalidUrl = "BS08PTQ9FS85K34E";
-        Floo.navigation(this, invalidUrl)
-            .appendQueryParameter("tab", "profile")
-            .appendQueryParameter("user_id", "drakeet")
-            .start();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.github) {
-            // This navigation will be handled by our registered WebHandler
-            // Floo.navigation(this, "https://github.com/drakeet/Floo").start();
-            // So we should open it by self:
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/drakeet/Floo")));
-        }
-        return true;
-    }
+    return true;
+  }
 }

@@ -30,22 +30,22 @@ import me.drakeet.floo.Urls;
  */
 public class WebHandler implements TargetNotFoundHandler {
 
-    @Override
-    public boolean onTargetNotFound(
-        @NonNull Context context,
-        @NonNull Uri sourceUri,
-        @NonNull Bundle extras,
-        @Nullable Integer intentFlags) {
+  @Override
+  public boolean onTargetNotFound(
+      @NonNull Context context,
+      @NonNull Uri sourceUri,
+      @NonNull Bundle extras,
+      @Nullable Integer intentFlags) {
 
-        if (Urls.isWebScheme(sourceUri)) {
-            Intent intent = new Intent(context, WebActivity.class);
-            intent.putExtra("url", sourceUri.toString());
-            if (intentFlags != null) {
-                intent.setFlags(intentFlags);
-            }
-            context.startActivity(intent);
-            return true;
-        }
-        return false;
+    if (Urls.isWebScheme(sourceUri)) {
+      Intent intent = new Intent(context, WebActivity.class);
+      intent.putExtra("url", sourceUri.toString());
+      if (intentFlags != null) {
+        intent.setFlags(intentFlags);
+      }
+      context.startActivity(intent);
+      return true;
     }
+    return false;
+  }
 }

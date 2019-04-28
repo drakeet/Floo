@@ -23,5 +23,5 @@ import androidx.annotation.NonNull;
  */
 public interface Interceptor {
 
-    @NonNull Chain intercept(@NonNull Chain chain);
+  @NonNull Chain intercept(@NonNull Chain chain);
 }

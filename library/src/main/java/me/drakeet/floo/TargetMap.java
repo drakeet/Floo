@@ -27,28 +27,24 @@ import java.util.Map;
  */
 final class TargetMap {
 
-    private @NonNull Map<String, Target> map;
+  private @NonNull Map<String, Target> map;
 
+  TargetMap(@NonNull Map<String, Target> map) {
+    this.map = map;
+  }
 
-    TargetMap(@NonNull Map<String, Target> map) {
-        this.map = map;
-    }
+  void set(@NonNull Map<String, Target> map) {
+    this.map = map;
+  }
 
+  @NonNull
+  Map<String, Target> get() {
+    return map;
+  }
 
-    void set(@NonNull Map<String, Target> map) {
-        this.map = map;
-    }
-
-
-    @NonNull
-    Map<String, Target> get() {
-        return map;
-    }
-
-
-    @Nullable
-    Target getTarget(@NonNull String url) {
-        // TODO: 2017/8/23 case?
-        return map.get(url);
-    }
+  @Nullable
+  Target getTarget(@NonNull String url) {
+    // TODO: 2017/8/23 case?
+    return map.get(url);
+  }
 }

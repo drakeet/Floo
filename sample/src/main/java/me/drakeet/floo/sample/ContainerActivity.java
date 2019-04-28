@@ -34,79 +34,72 @@ import me.drakeet.floo.Urls;
  */
 public class ContainerActivity extends AppCompatActivity implements StackCallback {
 
-    private TextView textView;
+  private TextView textView;
 
-
-    @Nullable @Override
-    public String indexKeyForStackTarget() {
-        if (getIntent().getData() == null) {
-            return null;
-        }
-        String pageURLOfThis = getIntent().getData().getQueryParameter("url");
-        Uri pageUri = Uri.parse(pageURLOfThis);
-
-        return Urls.indexUrl(pageUri);
+  @Nullable @Override
+  public String indexKeyForStackTarget() {
+    if (getIntent().getData() == null) {
+      return null;
     }
+    String pageURLOfThis = getIntent().getData().getQueryParameter("url");
+    Uri pageUri = Uri.parse(pageURLOfThis);
 
+    return Urls.indexUrl(pageUri);
+  }
 
-    @Override
-    public void onReceivedResult(@Nullable Object result) {
-        textView.append("\n\nReceived data: " + result);
-        textView.append("\n(You have passed a data from a page to current page successfully)");
+  @Override
+  public void onReceivedResult(@Nullable Object result) {
+    textView.append("\n\nReceived data: " + result);
+    textView.append("\n(You have passed a data from a page to current page successfully)");
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_container);
+    textView = (TextView) findViewById(R.id.url_text);
+    if (getIntent().getData() != null) {
+      textView.setText(getIntent().getData().toString());
     }
+  }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_container);
-        textView = (TextView) findViewById(R.id.url_text);
-        if (getIntent().getData() != null) {
-            textView.setText(getIntent().getData().toString());
-        }
+  @Override
+  protected void onStart() {
+    super.onStart();
+    if (getIntent().getData() == null) {
+      return;
     }
+    String subURLOfThis = getIntent().getData().getQueryParameter("url");
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (getIntent().getData() == null) {
-            return;
-        }
-        String subURLOfThis = getIntent().getData().getQueryParameter("url");
-
-        Button setResultButton = (Button) findViewById(R.id.set_result_button);
-        if (subURLOfThis.contains("page5")) {
-            setResultButton.setVisibility(View.VISIBLE);
-        } else {
-            setResultButton.setVisibility(View.INVISIBLE);
-        }
+    Button setResultButton = (Button) findViewById(R.id.set_result_button);
+    if (subURLOfThis.contains("page5")) {
+      setResultButton.setVisibility(View.VISIBLE);
+    } else {
+      setResultButton.setVisibility(View.INVISIBLE);
     }
+  }
 
+  @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+  public void setResultAndBackToPage2(View view) {
+    Floo.stack(this)
+        .target(Urls.indexUrl("https://chunchun.io/page2"))
+        .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
+        .start();
+  }
 
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    public void setResultAndBackToPage2(View view) {
-        Floo.stack(this)
-            .target(Urls.indexUrl("https://chunchun.io/page2"))
-            .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
-            .start();
+  @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+  private void popCount() {
+    Floo.stack(this)
+        .popCount(2)
+        .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
+        .start();
+  }
+
+  public void back(View view) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+      Floo.stack(this).popCount(1).start();
+    } else {
+      onBackPressed();
     }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private void popCount() {
-        Floo.stack(this)
-            .popCount(2)
-            .result("https://play.google.com/store/apps/details?id=com.drakeet.purewriter")
-            .start();
-    }
-
-
-    public void back(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            Floo.stack(this).popCount(1).start();
-        } else {
-            onBackPressed();
-        }
-    }
+  }
 }

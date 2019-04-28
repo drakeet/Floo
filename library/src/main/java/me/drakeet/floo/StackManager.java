@@ -26,116 +26,100 @@ import androidx.annotation.Nullable;
  */
 final class StackManager {
 
-    private @Nullable static String targetIndexKey;
-    private @Nullable static Object result;
+  private @Nullable static String targetIndexKey;
+  private @Nullable static Object result;
 
-    private static boolean hasCount;
-    private static int currentCount;
+  private static boolean hasCount;
+  private static int currentCount;
 
+  private StackManager() { throw new AssertionError(); }
 
-    private StackManager() { throw new AssertionError(); }
+  static void start(@NonNull Activity activity) {
+    consumeACount();
+    activity.finish();
+  }
 
-
-    static void start(@NonNull Activity activity) {
-        consumeACount();
-        activity.finish();
-    }
-
-
-    static void onActivityResumed(@NonNull final Activity activity) {
-        if (hasCount() && currentCount > 0) {
-            consumeACount();
-            activity.finish();
-        } else if (hasCount() && currentCount <= 0) {
-            consumeHasCount();
-            if (hasResult()) {
-                if (activity instanceof StackCallback) {
-                    StackCallback callback = stackCallback(activity);
-                    callback.onReceivedResult(result);
-                    consumeResult();
-                } else {
-                    consumeResult();
-                }
-            }
-        } else if (hasTarget()) {
-            if (activity instanceof StackCallback) {
-                StackCallback callback = stackCallback(activity);
-
-                if (match(callback.indexKeyForStackTarget())) {
-                    consumeTarget();
-                    if (hasResult()) {
-                        callback.onReceivedResult(result);
-                        consumeResult();
-                    }
-                } else {
-                    activity.finish();
-                }
-            } else {
-                reset();
-            }
+  static void onActivityResumed(@NonNull final Activity activity) {
+    if (hasCount() && currentCount > 0) {
+      consumeACount();
+      activity.finish();
+    } else if (hasCount() && currentCount <= 0) {
+      consumeHasCount();
+      if (hasResult()) {
+        if (activity instanceof StackCallback) {
+          StackCallback callback = stackCallback(activity);
+          callback.onReceivedResult(result);
+          consumeResult();
+        } else {
+          consumeResult();
         }
+      }
+    } else if (hasTarget()) {
+      if (activity instanceof StackCallback) {
+        StackCallback callback = stackCallback(activity);
+
+        if (match(callback.indexKeyForStackTarget())) {
+          consumeTarget();
+          if (hasResult()) {
+            callback.onReceivedResult(result);
+            consumeResult();
+          }
+        } else {
+          activity.finish();
+        }
+      } else {
+        reset();
+      }
     }
+  }
 
+  private static void consumeHasCount() {
+    StackManager.hasCount = false;
+  }
 
-    private static void consumeHasCount() {
-        StackManager.hasCount = false;
-    }
+  static void post(@Nullable Object result, @NonNull String toMatcherKey) {
+    StackManager.result = result;
+    targetIndexKey = toMatcherKey;
+  }
 
+  static void postCount(@Nullable Object result, @IntRange(from = 1) int count) {
+    StackManager.result = result;
+    StackManager.hasCount = true;
+    StackManager.currentCount = count;
+  }
 
-    static void post(@Nullable Object result, @NonNull String toMatcherKey) {
-        StackManager.result = result;
-        targetIndexKey = toMatcherKey;
-    }
+  private static void reset() {
+    targetIndexKey = null;
+    result = null;
+    result = null;
+    hasCount = false;
+    currentCount = 0;
+  }
 
+  private static boolean hasTarget() {
+    return targetIndexKey != null;
+  }
 
-    static void postCount(@Nullable Object result, @IntRange(from = 1) int count) {
-        StackManager.result = result;
-        StackManager.hasCount = true;
-        StackManager.currentCount = count;
-    }
+  private static boolean match(@Nullable String matcherKey) {
+    return equals(matcherKey, StackManager.targetIndexKey);
+  }
 
+  private static void consumeTarget() { targetIndexKey = null; }
 
-    private static void reset() {
-        targetIndexKey = null;
-        result = null;
-        result = null;
-        hasCount = false;
-        currentCount = 0;
-    }
+  private static boolean hasResult() { return result != null; }
 
+  private static void consumeResult() { result = null; }
 
-    private static boolean hasTarget() {
-        return targetIndexKey != null;
-    }
+  private static boolean hasCount() { return hasCount; }
 
+  private static void consumeACount() { currentCount--; }
 
-    private static boolean match(@Nullable String matcherKey) {
-        return equals(matcherKey, StackManager.targetIndexKey);
-    }
+  @NonNull
+  private static StackCallback stackCallback(@NonNull Activity activity) {
+    return (StackCallback) activity;
+  }
 
-
-    private static void consumeTarget() { targetIndexKey = null; }
-
-
-    private static boolean hasResult() { return result != null; }
-
-
-    private static void consumeResult() { result = null; }
-
-
-    private static boolean hasCount() { return hasCount; }
-
-
-    private static void consumeACount() { currentCount--; }
-
-
-    @NonNull
-    private static StackCallback stackCallback(@NonNull Activity activity) {
-        return (StackCallback) activity;
-    }
-
-
-    private static boolean equals(@Nullable Object a, @Nullable Object b) {
-        return (a == b) || (a != null && a.equals(b));
-    }
+  private static boolean equals(@Nullable Object a, @Nullable Object b) {
+    return (a == b) || (a != null && a.equals(b));
+  }
 }

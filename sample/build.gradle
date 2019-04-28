@@ -20,56 +20,56 @@ def releaseKey = file('release.jks')
 def debugKey = file('debug.jks')
 
 android {
-    compileSdkVersion 28
+  compileSdkVersion 28
 
-    defaultConfig {
-        applicationId "me.drakeet.floo.sample"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 10
-        versionName "1.1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+  defaultConfig {
+    applicationId "me.drakeet.floo.sample"
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 10
+    versionName "1.1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
 
-    signingConfigs {
-        debug {
-            storeFile debugKey
-            storePassword '123456'
-            keyAlias 'debug'
-            keyPassword '123456'
-        }
-        release {
-            storeFile releaseKey
-            storePassword project.hasProperty('FLOO_STOREPASS') ? FLOO_STOREPASS : ''
-            keyAlias project.hasProperty('FLOO_KEYALIAS') ? FLOO_KEYALIAS : ''
-            keyPassword project.hasProperty('FLOO_KEYPASS') ? FLOO_KEYPASS : ''
-        }
+  signingConfigs {
+    debug {
+      storeFile debugKey
+      storePassword '123456'
+      keyAlias 'debug'
+      keyPassword '123456'
     }
+    release {
+      storeFile releaseKey
+      storePassword project.hasProperty('FLOO_STOREPASS') ? FLOO_STOREPASS : ''
+      keyAlias project.hasProperty('FLOO_KEYALIAS') ? FLOO_KEYALIAS : ''
+      keyPassword project.hasProperty('FLOO_KEYPASS') ? FLOO_KEYPASS : ''
+    }
+  }
 
-    buildTypes {
-        debug {
-            versionNameSuffix " debug"
-            applicationIdSuffix ".debug"
-            resValue "string", "scheme", "floo-debug"
-        }
-        release {
-            resValue "string", "scheme", "floo"
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    debug {
+      versionNameSuffix " debug"
+      applicationIdSuffix ".debug"
+      resValue "string", "scheme", "floo-debug"
     }
+    release {
+      resValue "string", "scheme", "floo"
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
 }
 
 dependencies {
-    implementation project(':library')
+  implementation project(':library')
 
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation('androidx.test.espresso:espresso-intents:3.1.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+  androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  androidTestImplementation('androidx.test.espresso:espresso-intents:3.1.0', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
+  implementation 'androidx.appcompat:appcompat:1.0.2'
+  testImplementation 'junit:junit:4.12'
 }

@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
  */
 public interface IntentHandler {
 
-    /**
-     * Called immediately after intent has created on {@link Floo#start()}.
-     *
-     * @param context The context.
-     * @param intent The intent.
-     */
-    void onIntentCreated(@NonNull Context context, @NonNull Intent intent);
+  /**
+   * Called immediately after intent has created on {@link Floo#start()}.
+   *
+   * @param context The context.
+   * @param intent The intent.
+   */
+  void onIntentCreated(@NonNull Context context, @NonNull Intent intent);
 }

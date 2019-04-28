@@ -24,40 +24,34 @@ import androidx.annotation.NonNull;
  */
 public class Chain {
 
-    private @NonNull final Uri requestUri;
-    private boolean proceed = true;
+  private @NonNull final Uri requestUri;
+  private boolean proceed = true;
 
+  public Chain(@NonNull Uri requestUri) {
+    this.requestUri = requestUri;
+  }
 
-    public Chain(@NonNull Uri requestUri) {
-        this.requestUri = requestUri;
-    }
+  private Chain(@NonNull Uri requestUri, boolean proceed) {
+    this.requestUri = requestUri;
+    this.proceed = proceed;
+  }
 
+  @NonNull
+  public Uri request() {
+    return requestUri;
+  }
 
-    private Chain(@NonNull Uri requestUri, boolean proceed) {
-        this.requestUri = requestUri;
-        this.proceed = proceed;
-    }
+  @NonNull
+  public Chain proceed(@NonNull final Uri requestUri) {
+    return new Chain(requestUri, true);
+  }
 
+  @NonNull
+  public Chain abort() {
+    return new Chain(requestUri, false);
+  }
 
-    @NonNull
-    public Uri request() {
-        return requestUri;
-    }
-
-
-    @NonNull
-    public Chain proceed(@NonNull final Uri requestUri) {
-        return new Chain(requestUri, true);
-    }
-
-
-    @NonNull
-    public Chain abort() {
-        return new Chain(requestUri, false);
-    }
-
-
-    public boolean isProceed() {
-        return proceed;
-    }
+  public boolean isProceed() {
+    return proceed;
+  }
 }

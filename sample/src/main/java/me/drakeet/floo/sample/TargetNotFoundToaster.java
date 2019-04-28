@@ -29,14 +29,14 @@ import me.drakeet.floo.TargetNotFoundHandler;
  */
 public class TargetNotFoundToaster implements TargetNotFoundHandler {
 
-    @Override
-    public boolean onTargetNotFound(
-        @NonNull Context context,
-        @NonNull Uri sourceUri,
-        @NonNull Bundle extras,
-        @Nullable Integer intentFlags) {
+  @Override
+  public boolean onTargetNotFound(
+      @NonNull Context context,
+      @NonNull Uri sourceUri,
+      @NonNull Bundle extras,
+      @Nullable Integer intentFlags) {
 
-        Toast.makeText(context, "ERROR: " + sourceUri.toString(), Toast.LENGTH_SHORT).show();
-        return true;
-    }
+    Toast.makeText(context, "ERROR: " + sourceUri.toString(), Toast.LENGTH_SHORT).show();
+    return true;
+  }
 }

@@ -23,14 +23,13 @@ import androidx.annotation.NonNull;
  */
 public class URLs {
 
-    private static final String MAIN_SCHEME = "floo";
+  private static final String MAIN_SCHEME = "floo";
 
-    public static final String WEB = "https://m.drakeet.me/web";
-    public static final String NOT_REGISTERED = "floo://m.drakeet.me/not_registered";
+  public static final String WEB = "https://m.drakeet.me/web";
+  public static final String NOT_REGISTERED = "floo://m.drakeet.me/not_registered";
 
-
-    @NonNull
-    public static String scheme() {
-        return MAIN_SCHEME;
-    }
+  @NonNull
+  public static String scheme() {
+    return MAIN_SCHEME;
+  }
 }

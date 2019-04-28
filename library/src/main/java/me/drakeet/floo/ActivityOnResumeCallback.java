@@ -28,30 +28,24 @@ import androidx.annotation.RequiresApi;
 @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public abstract class ActivityOnResumeCallback implements Application.ActivityLifecycleCallbacks {
 
-    @Override
-    public abstract void onActivityResumed(Activity activity);
+  @Override
+  public abstract void onActivityResumed(Activity activity);
 
+  @Override
+  public final void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
 
-    @Override
-    public final void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
+  @Override
+  public final void onActivityStarted(Activity activity) {}
 
+  @Override
+  public final void onActivityPaused(Activity activity) {}
 
-    @Override
-    public final void onActivityStarted(Activity activity) {}
+  @Override
+  public final void onActivityStopped(Activity activity) {}
 
+  @Override
+  public final void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
 
-    @Override
-    public final void onActivityPaused(Activity activity) {}
-
-
-    @Override
-    public final void onActivityStopped(Activity activity) {}
-
-
-    @Override
-    public final void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
-
-
-    @Override
-    public final void onActivityDestroyed(Activity activity) {}
+  @Override
+  public final void onActivityDestroyed(Activity activity) {}
 }

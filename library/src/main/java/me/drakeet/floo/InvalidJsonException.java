@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
  */
 class InvalidJsonException extends RuntimeException {
 
-    InvalidJsonException(@NonNull String json, @NonNull Throwable throwable) {
-        super("Invalid JSON: " + json, throwable);
-    }
+  InvalidJsonException(@NonNull String json, @NonNull Throwable throwable) {
+    super("Invalid JSON: " + json, throwable);
+  }
 }

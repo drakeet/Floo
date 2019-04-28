@@ -30,30 +30,30 @@ import java.util.ArrayList;
  */
 public interface Navigation {
 
-    @NonNull @CheckResult Navigation setFlags(int intentFlags);
-    @NonNull @CheckResult Navigation appendQueryParameter(@NonNull String key, @NonNull String value);
+  @NonNull @CheckResult Navigation setFlags(int intentFlags);
+  @NonNull @CheckResult Navigation appendQueryParameter(@NonNull String key, @NonNull String value);
 
-    @NonNull @CheckResult Navigation putExtras(@NonNull Bundle bundle);
-    @NonNull @CheckResult Navigation putExtras(@NonNull Intent intent);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, int value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, long value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, float value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, double value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, boolean value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, byte value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, short value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable String value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable CharSequence value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable Parcelable value);
-    @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable Serializable value);
-    @NonNull @CheckResult Navigation putIntegerArrayListExtra(@NonNull String name, @NonNull ArrayList<Integer> value);
-    @NonNull @CheckResult Navigation putStringArrayListExtra(@NonNull String name, @NonNull ArrayList<String> value);
-    @NonNull @CheckResult Navigation putCharSequenceArrayListExtra(@NonNull String name, @NonNull ArrayList<CharSequence> value);
-    @NonNull @CheckResult Navigation putParcelableArrayListExtra(@NonNull String name, @NonNull ArrayList<? extends Parcelable> value);
+  @NonNull @CheckResult Navigation putExtras(@NonNull Bundle bundle);
+  @NonNull @CheckResult Navigation putExtras(@NonNull Intent intent);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, int value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, long value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, float value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, double value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, boolean value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, byte value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, short value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable String value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable CharSequence value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable Parcelable value);
+  @NonNull @CheckResult Navigation putExtra(@NonNull String key, @Nullable Serializable value);
+  @NonNull @CheckResult Navigation putIntegerArrayListExtra(@NonNull String name, @NonNull ArrayList<Integer> value);
+  @NonNull @CheckResult Navigation putStringArrayListExtra(@NonNull String name, @NonNull ArrayList<String> value);
+  @NonNull @CheckResult Navigation putCharSequenceArrayListExtra(@NonNull String name, @NonNull ArrayList<CharSequence> value);
+  @NonNull @CheckResult Navigation putParcelableArrayListExtra(@NonNull String name, @NonNull ArrayList<? extends Parcelable> value);
 
-    @Nullable @CheckResult Intent getIntent();
+  @Nullable @CheckResult Intent getIntent();
 
-    boolean hasTarget();
-    void ifIntentNonNullSendTo(@NonNull IntentReceiver receiver);
-    void start();
+  boolean hasTarget();
+  void ifIntentNonNullSendTo(@NonNull IntentReceiver receiver);
+  void start();
 }

@@ -24,26 +24,23 @@ import androidx.annotation.NonNull;
  */
 public class Urls {
 
-    // TODO: 2017/9/11 Match Case
+  // TODO: 2017/9/11 Match Case
 
+  @NonNull
+  public static String indexUrl(@NonNull final String uriString) {
+    return indexUrl(Uri.parse(uriString));
+  }
 
-    @NonNull
-    public static String indexUrl(@NonNull final String uriString) {
-        return indexUrl(Uri.parse(uriString));
-    }
+  @NonNull
+  public static String indexUrl(@NonNull final Uri uri) {
+    return uri.getScheme() != null && uri.getAuthority() != null ?
+           uri.getAuthority() + uri.getPath() :
+           uri.getPath();
+  }
 
-
-    @NonNull
-    public static String indexUrl(@NonNull final Uri uri) {
-        return uri.getScheme() != null && uri.getAuthority() != null ?
-               uri.getAuthority() + uri.getPath() :
-               uri.getPath();
-    }
-
-
-    public static boolean isWebScheme(@NonNull Uri sourceUri) {
-        return sourceUri.getScheme() != null &&
-            (sourceUri.getScheme().toLowerCase().equals("http") ||
-                sourceUri.getScheme().toLowerCase().equals("https"));
-    }
+  public static boolean isWebScheme(@NonNull Uri sourceUri) {
+    return sourceUri.getScheme() != null &&
+        (sourceUri.getScheme().toLowerCase().equals("http") ||
+            sourceUri.getScheme().toLowerCase().equals("https"));
+  }
 }

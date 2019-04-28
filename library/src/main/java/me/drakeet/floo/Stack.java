@@ -27,44 +27,39 @@ import androidx.annotation.Nullable;
  */
 public class Stack implements StackStates.Target, StackStates.Flow, StackStates.End {
 
-    private @NonNull final Activity activity;
+  private @NonNull final Activity activity;
 
-    private @Nullable Object result;
-    private @Nullable String indexKey;
+  private @Nullable Object result;
+  private @Nullable String indexKey;
 
-    private int count = 1;
+  private int count = 1;
 
+  public Stack(@NonNull Activity activity) { this.activity = activity; }
 
-    public Stack(@NonNull Activity activity) { this.activity = activity; }
+  @NonNull @CheckResult
+  public StackStates.Flow popCount(@IntRange(from = 1) int count) {
+    this.count = count;
+    return this;
+  }
 
+  @NonNull @CheckResult
+  public StackStates.Flow target(@NonNull String indexKey) {
+    this.indexKey = indexKey;
+    return this;
+  }
 
-    @NonNull @CheckResult
-    public StackStates.Flow popCount(@IntRange(from = 1) int count) {
-        this.count = count;
-        return this;
+  @NonNull @CheckResult
+  public StackStates.End result(@NonNull Object result) {
+    this.result = result;
+    return this;
+  }
+
+  public void start() {
+    if (indexKey != null) {
+      StackManager.post(result, indexKey);
+    } else {
+      StackManager.postCount(result, count);
     }
-
-
-    @NonNull @CheckResult
-    public StackStates.Flow target(@NonNull String indexKey) {
-        this.indexKey = indexKey;
-        return this;
-    }
-
-
-    @NonNull @CheckResult
-    public StackStates.End result(@NonNull Object result) {
-        this.result = result;
-        return this;
-    }
-
-
-    public void start() {
-        if (indexKey != null) {
-            StackManager.post(result, indexKey);
-        } else {
-            StackManager.postCount(result, count);
-        }
-        StackManager.start(activity);
-    }
+    StackManager.start(activity);
+  }
 }

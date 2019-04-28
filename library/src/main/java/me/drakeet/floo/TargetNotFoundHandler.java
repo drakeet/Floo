@@ -30,20 +30,20 @@ import androidx.annotation.Nullable;
  */
 public interface TargetNotFoundHandler {
 
-    /**
-     * Called when a target not found event occurred. This allows handlers to
-     * get a chance to respond before error.
-     *
-     * @param context The context.
-     * @param sourceUri The source URI.
-     * @param extras The bundle extras.
-     * @param intentFlags The desired flags.
-     * @return True if the handler has consumed the event, false otherwise.
-     */
-    boolean onTargetNotFound(
-        @NonNull Context context,
-        @NonNull Uri sourceUri,
-        @NonNull Bundle extras,
-        @Nullable Integer intentFlags
-    );
+  /**
+   * Called when a target not found event occurred. This allows handlers to
+   * get a chance to respond before error.
+   *
+   * @param context The context.
+   * @param sourceUri The source URI.
+   * @param extras The bundle extras.
+   * @param intentFlags The desired flags.
+   * @return True if the handler has consumed the event, false otherwise.
+   */
+  boolean onTargetNotFound(
+      @NonNull Context context,
+      @NonNull Uri sourceUri,
+      @NonNull Bundle extras,
+      @Nullable Integer intentFlags
+  );
 }

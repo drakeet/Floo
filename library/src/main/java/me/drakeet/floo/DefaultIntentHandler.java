@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
  */
 public class DefaultIntentHandler implements IntentHandler {
 
-    @Override
-    public void onIntentCreated(@NonNull Context context, @NonNull Intent intent) {
-        context.startActivity(intent);
-    }
+  @Override
+  public void onIntentCreated(@NonNull Context context, @NonNull Intent intent) {
+    context.startActivity(intent);
+  }
 }

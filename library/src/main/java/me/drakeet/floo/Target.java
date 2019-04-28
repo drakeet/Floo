@@ -25,38 +25,33 @@ import androidx.annotation.NonNull;
  */
 public class Target {
 
-    private @NonNull final String url;
+  private @NonNull final String url;
 
+  public Target(@NonNull String url) {
+    this.url = url;
+  }
 
-    public Target(@NonNull String url) {
-        this.url = url;
-    }
+  @NonNull
+  public String toTargetUrl() {
+    return Uri.parse(url).buildUpon().build().toString();
+  }
 
+  @NonNull
+  public String getUrl() {
+    return url;
+  }
 
-    @NonNull
-    public String toTargetUrl() {
-        return Uri.parse(url).buildUpon().build().toString();
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
 
+    Target target = (Target) o;
+    return url.equals(target.url);
+  }
 
-    @NonNull
-    public String getUrl() {
-        return url;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Target target = (Target) o;
-        return url.equals(target.url);
-    }
-
-
-    @Override
-    public int hashCode() {
-        return url.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return url.hashCode();
+  }
 }

@@ -24,5 +24,5 @@ import androidx.annotation.NonNull;
  */
 public interface IntentReceiver {
 
-    void onReceived(@NonNull Intent intent);
+  void onReceived(@NonNull Intent intent);
 }

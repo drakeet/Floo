@@ -25,39 +25,37 @@ import android.widget.TextView;
 
 public class TargetActivity extends AppCompatActivity {
 
-    public static final String KEY_MAIL = "key_mail";
+  public static final String KEY_MAIL = "key_mail";
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_target);
+    Intent intent = getIntent();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_target);
-        Intent intent = getIntent();
+    TextView text = (TextView) findViewById(R.id.text);
+    text.append("\n\n\nExtras: \n\n");
 
-        TextView text = (TextView) findViewById(R.id.text);
-        text.append("\n\n\nExtras: \n\n");
-
-        Bundle bundle = intent.getExtras();
-        assert bundle != null;
-        for (String key : bundle.keySet()) {
-            text.append(key + "\n" + bundle.get(key) + "\n\n");
-        }
-
-        String sourceUrl = intent.getStringExtra("__source__");
-        if (sourceUrl != null) {
-            setTitle(Uri.parse(sourceUrl).getPath());
-        }
-
-        // noinspection ConstantConditions
-        String subUrl = intent.getData().getQueryParameter("url");
-        if (subUrl != null) {
-            text.append("\n\nSUB-URL: ");
-            text.append(subUrl);
-        }
+    Bundle bundle = intent.getExtras();
+    assert bundle != null;
+    for (String key : bundle.keySet()) {
+      text.append(key + "\n" + bundle.get(key) + "\n\n");
     }
 
-
-    public void onBack(View view) {
-        onBackPressed();
+    String sourceUrl = intent.getStringExtra("__source__");
+    if (sourceUrl != null) {
+      setTitle(Uri.parse(sourceUrl).getPath());
     }
+
+    // noinspection ConstantConditions
+    String subUrl = intent.getData().getQueryParameter("url");
+    if (subUrl != null) {
+      text.append("\n\nSUB-URL: ");
+      text.append(subUrl);
+    }
+  }
+
+  public void onBack(View view) {
+    onBackPressed();
+  }
 }

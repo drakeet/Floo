@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
  */
 public interface StackCallback {
 
-    @Nullable String indexKeyForStackTarget();
+  @Nullable String indexKeyForStackTarget();
 
-    void onReceivedResult(@Nullable Object result);
+  void onReceivedResult(@Nullable Object result);
 }

@@ -30,24 +30,24 @@ import me.drakeet.floo.TargetNotFoundHandler;
  */
 public class OpenDirectlyHandler implements TargetNotFoundHandler {
 
-    @Override
-    public boolean onTargetNotFound(
-        @NonNull Context context,
-        @NonNull Uri uri,
-        @NonNull Bundle bundle,
-        @Nullable Integer intentFlags) {
+  @Override
+  public boolean onTargetNotFound(
+      @NonNull Context context,
+      @NonNull Uri uri,
+      @NonNull Bundle bundle,
+      @Nullable Integer intentFlags) {
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        intent.putExtras(bundle);
-        if (intentFlags != null) {
-            intent.setFlags(intentFlags);
-        }
-        try {
-            context.startActivity(intent);
-        } catch (ActivityNotFoundException exception) {
-            exception.printStackTrace();
-            return false;
-        }
-        return true;
+    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+    intent.putExtras(bundle);
+    if (intentFlags != null) {
+      intent.setFlags(intentFlags);
     }
+    try {
+      context.startActivity(intent);
+    } catch (ActivityNotFoundException exception) {
+      exception.printStackTrace();
+      return false;
+    }
+    return true;
+  }
 }

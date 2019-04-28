@@ -32,49 +32,46 @@ import me.drakeet.floo.extensions.OpenDirectlyHandler;
  */
 public class App extends Application {
 
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+    Map<String, Target> mappings = new HashMap<>();
+    mappings.put("m.drakeet.me/home", new Target("floo://drakeet.sdk/target"));
+    mappings.put("m.drakeet.me/link", new Target("floo://drakeet.sdk/target"));
+    mappings.put("m.drakeet.me/web", new Target("floo://drakeet.sdk/web"));
+    mappings.put("m.drakeet.me/container", new Target("floo://m.drakeet.me/container"));
+    mappings.put("mosaic.chunchun.io:8080", new Target("https://play.google.com/store/apps/details?id=me.drakeet.puremosaic"));
+    mappings.put("PureWriter", new Target("https://play.google.com/store/apps/details?id=com.drakeet.purewriter"));
+
+    Floo.configuration()
+        .setDebugEnabled(true)
+        .addRequestInterceptor(new PureSchemeInterceptor(getString(R.string.scheme)))
+        .addRequestInterceptor(new LogInterceptor("Request"))
+        .addTargetInterceptor(new PureSchemeInterceptor(getString(R.string.scheme)))
+        .addTargetInterceptor(new LogInterceptor("Target"))
+        .addTargetNotFoundHandler(new WebHandler())
+        .addTargetNotFoundHandler(new OpenDirectlyHandler())
+        .addTargetNotFoundHandler(new TargetNotFoundToaster());
+
+    Floo.apply(mappings);
+  }
+
+  private static class PureSchemeInterceptor implements Interceptor {
+
+    private @NonNull final String scheme;
+
+    private PureSchemeInterceptor(@NonNull String scheme) {
+      this.scheme = scheme;
+    }
+
+    @NonNull
     @Override
-    public void onCreate() {
-        super.onCreate();
-
-        Map<String, Target> mappings = new HashMap<>();
-        mappings.put("m.drakeet.me/home", new Target("floo://drakeet.sdk/target"));
-        mappings.put("m.drakeet.me/link", new Target("floo://drakeet.sdk/target"));
-        mappings.put("m.drakeet.me/web", new Target("floo://drakeet.sdk/web"));
-        mappings.put("m.drakeet.me/container", new Target("floo://m.drakeet.me/container"));
-        mappings.put("mosaic.chunchun.io:8080", new Target("https://play.google.com/store/apps/details?id=me.drakeet.puremosaic"));
-        mappings.put("PureWriter", new Target("https://play.google.com/store/apps/details?id=com.drakeet.purewriter"));
-
-        Floo.configuration()
-            .setDebugEnabled(true)
-            .addRequestInterceptor(new PureSchemeInterceptor(getString(R.string.scheme)))
-            .addRequestInterceptor(new LogInterceptor("Request"))
-            .addTargetInterceptor(new PureSchemeInterceptor(getString(R.string.scheme)))
-            .addTargetInterceptor(new LogInterceptor("Target"))
-            .addTargetNotFoundHandler(new WebHandler())
-            .addTargetNotFoundHandler(new OpenDirectlyHandler())
-            .addTargetNotFoundHandler(new TargetNotFoundToaster());
-
-        Floo.apply(mappings);
+    public Chain intercept(@NonNull Chain chain) {
+      if (BuildConfig.DEBUG && URLs.scheme().equals(chain.request().getScheme())) {
+        chain = new Chain(chain.request().buildUpon().scheme(scheme).build());
+      }
+      return chain;
     }
-
-
-    private static class PureSchemeInterceptor implements Interceptor {
-
-        private @NonNull final String scheme;
-
-
-        private PureSchemeInterceptor(@NonNull String scheme) {
-            this.scheme = scheme;
-        }
-
-
-        @NonNull
-        @Override
-        public Chain intercept(@NonNull Chain chain) {
-            if (BuildConfig.DEBUG && URLs.scheme().equals(chain.request().getScheme())) {
-                chain = new Chain(chain.request().buildUpon().scheme(scheme).build());
-            }
-            return chain;
-        }
-    }
+  }
 }

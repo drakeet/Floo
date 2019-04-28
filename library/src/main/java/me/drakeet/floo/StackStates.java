@@ -25,19 +25,17 @@ import androidx.annotation.NonNull;
  */
 public interface StackStates {
 
-    interface Target {
-        @NonNull @CheckResult Flow popCount(@IntRange(from = 1) int count);
-        @NonNull @CheckResult Flow target(@NonNull String indexKey);
-    }
+  interface Target {
+    @NonNull @CheckResult Flow popCount(@IntRange(from = 1) int count);
+    @NonNull @CheckResult Flow target(@NonNull String indexKey);
+  }
 
+  interface Flow {
+    @NonNull @CheckResult End result(@NonNull Object result);
+    void start();
+  }
 
-    interface Flow {
-        @NonNull @CheckResult End result(@NonNull Object result);
-        void start();
-    }
-
-
-    interface End {
-        void start();
-    }
+  interface End {
+    void start();
+  }
 }

@@ -26,17 +26,15 @@ import me.drakeet.floo.Interceptor;
  */
 public class LogInterceptor implements Interceptor {
 
-    private @NonNull final String tag;
+  private @NonNull final String tag;
 
+  public LogInterceptor(@NonNull String tag) {
+    this.tag = tag;
+  }
 
-    public LogInterceptor(@NonNull String tag) {
-        this.tag = tag;
-    }
-
-
-    @NonNull @Override
-    public Chain intercept(@NonNull Chain chain) {
-        Log.d("Floo", "LogInterceptor: " + tag + ": " + chain.request());
-        return chain;
-    }
+  @NonNull @Override
+  public Chain intercept(@NonNull Chain chain) {
+    Log.d("Floo", "LogInterceptor: " + tag + ": " + chain.request());
+    return chain;
+  }
 }

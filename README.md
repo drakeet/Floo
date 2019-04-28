@@ -16,15 +16,15 @@ In your `build.gradle`:
 
 ```groovy
 dependencies {
-    compile 'com.drakeet.floo:floo:1.2.0'
+  implementation 'com.drakeet.floo:floo:1.2.0'
 }
 ```
 
-If you are using `com.android.tools.build:gradle:3.+`, use this instead:
+Floo has been rebuilt based on AndroidX. If you are still using the android support library, please use:
 
 ```groovy
 dependencies {
-    implementation 'com.drakeet.floo:floo:1.2.0'
+  implementation 'me.drakeet.floo:floo:1.1.0'
 }
 ```
 

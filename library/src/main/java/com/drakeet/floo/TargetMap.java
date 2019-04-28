@@ -14,28 +14,37 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo;
 
-android {
-  compileSdkVersion 28
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import java.util.Map;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
+/**
+ * url - Target
+ *
+ * @author drakeet
+ */
+final class TargetMap {
+
+  private @NonNull Map<String, Target> map;
+
+  TargetMap(@NonNull Map<String, Target> map) {
+    this.map = map;
   }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
+  void set(@NonNull Map<String, Target> map) {
+    this.map = map;
   }
-}
 
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
+  @NonNull
+  Map<String, Target> get() {
+    return map;
+  }
+
+  @Nullable
+  Target getTarget(@NonNull String url) {
+    // TODO: 2017/8/23 case?
+    return map.get(url);
+  }
 }

@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo;
 
-android {
-  compileSdkVersion 28
+import androidx.annotation.Nullable;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
-  }
+/**
+ * @author drakeet
+ */
+public interface StackCallback {
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
-  }
-}
+  @Nullable String indexKeyForStackTarget();
 
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
+  void onReceivedResult(@Nullable Object result);
 }

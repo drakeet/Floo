@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo;
 
-android {
-  compileSdkVersion 28
+import android.content.Intent;
+import androidx.annotation.NonNull;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
-  }
+/**
+ * @author drakeet
+ */
+public interface IntentReceiver {
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
-  }
-}
-
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
+  void onReceived(@NonNull Intent intent);
 }

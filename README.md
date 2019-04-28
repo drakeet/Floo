@@ -16,7 +16,7 @@ In your `build.gradle`:
 
 ```groovy
 dependencies {
-    compile 'me.drakeet.floo:floo:1.1.0'
+    compile 'com.drakeet.floo:floo:1.2.0'
 }
 ```
 
@@ -24,7 +24,7 @@ If you are using `com.android.tools.build:gradle:3.+`, use this instead:
 
 ```groovy
 dependencies {
-    implementation 'me.drakeet.floo:floo:1.1.0'
+    implementation 'com.drakeet.floo:floo:1.2.0'
 }
 ```
 
@@ -173,7 +173,7 @@ public interface StackStates {
 ## Progurad
 
 ```
--keep class me.drakeet.floo.Target { *; }
+-keep class com.drakeet.floo.Target { *; }
 ```
 
 ## Some built-in extensions

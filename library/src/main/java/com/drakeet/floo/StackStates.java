@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo;
 
-android {
-  compileSdkVersion 28
+import androidx.annotation.CheckResult;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
+/**
+ * @author drakeet
+ */
+public interface StackStates {
+
+  interface Target {
+    @NonNull @CheckResult Flow popCount(@IntRange(from = 1) int count);
+    @NonNull @CheckResult Flow target(@NonNull String indexKey);
   }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
+  interface Flow {
+    @NonNull @CheckResult End result(@NonNull Object result);
+    void start();
   }
-}
 
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
+  interface End {
+    void start();
+  }
 }

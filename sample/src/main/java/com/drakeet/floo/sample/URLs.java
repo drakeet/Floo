@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo.sample;
 
-android {
-  compileSdkVersion 28
+import androidx.annotation.NonNull;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
+/**
+ * @author drakeet
+ */
+public class URLs {
+
+  private static final String MAIN_SCHEME = "floo";
+
+  public static final String WEB = "https://m.drakeet.me/web";
+  public static final String NOT_REGISTERED = "floo://m.drakeet.me/not_registered";
+
+  @NonNull
+  public static String scheme() {
+    return MAIN_SCHEME;
   }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
-  }
-}
-
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
 }

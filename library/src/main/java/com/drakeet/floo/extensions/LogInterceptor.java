@@ -14,28 +14,27 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply from: 'gradle-mvn-push.gradle'
+package com.drakeet.floo.extensions;
 
-android {
-  compileSdkVersion 28
+import androidx.annotation.NonNull;
+import android.util.Log;
+import com.drakeet.floo.Chain;
+import com.drakeet.floo.Interceptor;
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 12
-    versionName "1.2.0"
+/**
+ * @author drakeet
+ */
+public class LogInterceptor implements Interceptor {
+
+  private @NonNull final String tag;
+
+  public LogInterceptor(@NonNull String tag) {
+    this.tag = tag;
   }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      consumerProguardFile 'proguard-rules.pro'
-    }
+  @NonNull @Override
+  public Chain intercept(@NonNull Chain chain) {
+    Log.d("Floo", "LogInterceptor: " + tag + ": " + chain.request());
+    return chain;
   }
-}
-
-dependencies {
-  testImplementation 'junit:junit:4.12'
-  implementation 'androidx.annotation:annotation:1.0.2'
 }

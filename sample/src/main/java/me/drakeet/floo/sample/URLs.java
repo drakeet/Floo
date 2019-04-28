@@ -16,7 +16,7 @@
 
 package me.drakeet.floo.sample;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author drakeet

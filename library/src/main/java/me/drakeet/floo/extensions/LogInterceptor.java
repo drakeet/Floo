@@ -16,7 +16,7 @@
 
 package me.drakeet.floo.extensions;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import me.drakeet.floo.Chain;
 import me.drakeet.floo.Interceptor;

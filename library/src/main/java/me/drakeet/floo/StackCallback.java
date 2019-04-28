@@ -16,7 +16,7 @@
 
 package me.drakeet.floo;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * @author drakeet

@@ -17,7 +17,7 @@
 package me.drakeet.floo;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author drakeet

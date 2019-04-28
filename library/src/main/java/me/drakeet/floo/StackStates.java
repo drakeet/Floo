@@ -16,9 +16,9 @@
 
 package me.drakeet.floo;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
+import androidx.annotation.CheckResult;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 /**
  * @author drakeet

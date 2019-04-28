@@ -16,15 +16,13 @@
 
 apply plugin: 'com.android.library'
 apply from: 'gradle-mvn-push.gradle'
-apply from: 'checkstyle.gradle'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.1'
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 28
         versionCode 7
         versionName "1.0.5"
     }
@@ -38,8 +36,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-
-    compile 'com.android.support:support-annotations:25.3.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.annotation:annotation:1.0.2'
 }

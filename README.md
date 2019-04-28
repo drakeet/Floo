@@ -170,6 +170,12 @@ public interface StackStates {
 }
 ```
 
+## Progurad
+
+```
+-keep class me.drakeet.floo.Target { *; }
+```
+
 ## Some built-in extensions
 
 - `LogInterceptor`

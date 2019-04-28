@@ -23,7 +23,6 @@ import android.support.annotation.NonNull;
 /**
  * @author drakeet
  */
-@Keep
 public class Target {
 
     private @NonNull final String url;
